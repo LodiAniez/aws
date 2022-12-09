@@ -34,7 +34,7 @@ app.post("/create", async (req, res) => {
       firstName, lastName
     })
 
-    const list = col.find().toArray()
+    const list = await col.find().toArray()
 
     res.render("list", { list, error: false })
   } catch (err) {

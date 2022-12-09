@@ -19,7 +19,7 @@ passport.use(new FacebookStrategy({
   callbackURL: process.env.FACEBOOK_CALLBACK_URL
 },
 function (accessToken, refreshToken, profile, cb) {
-  console.log(profile)
+  console.log("facebook profile", profile)
   
   return cb(null, profile)
 }));
@@ -30,7 +30,8 @@ passport.use(new GoogleStrategy({
   callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 function(issuer, profile, cb) {
-  console.log(profile)
+  console.log("google profile", profile)
+
   return cb(null, profile)
 }));
 
@@ -47,6 +48,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use("/", userRouter);
 

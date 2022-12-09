@@ -1,5 +1,6 @@
 const express = require("express")
 const passport = require("passport")
+const db = require("./../configs/db")
 
 const app = express.Router()
 
@@ -21,5 +22,24 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function(req, res) {
   res.redirect('/dashboard');
 });
+
+app.post("/create", async (req, res) => {
+  try {
+    const {firstName, lastName} = req.body
+    const database = await db
+
+    const col = database.db("crud").collection("users")
+
+    await col.insertOne({
+      firstName, lastName
+    })
+
+    const list = col.find().toArray()
+
+    res.render("list", { list, error: false })
+  } catch (err) {
+    res.sendStatus(500)
+  }
+})
 
 module.exports = app

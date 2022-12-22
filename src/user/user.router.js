@@ -55,13 +55,13 @@ app.post("/openai", async (req, res) => {
     model: "text-davinci-003",
     prompt: text,
     temperature: 0.7,
-    max_tokens: 64,
-    top_p: 1.0,
-    frequency_penalty: 0.0,
-    presence_penalty: 0.0
+    max_tokens: 256,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
   });
 
-  res.render("index", { response: response.data.choices[0].text, error: false })
+  res.render("index", { prompt: text, response: response.data.choices[0].text, error: false })
 })
 
 module.exports = app

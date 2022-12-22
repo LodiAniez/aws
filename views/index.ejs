@@ -63,18 +63,20 @@
   <div class="container">
     <div class="wrapper">
       <form action="/openai" method="post" class="form-wrapper">
-        <input type="text" placeholder="Type a question or a statement." name="text" required>
+        <textarea placeholder="Type a question or a statement." cols="30" rows="10" name="text" required></textarea>
         <input type="submit" value="Submit">
       </form>
-      <div>
+      <div style="width: 500px; margin-top: 10px;">
         <% if (typeof error !== "undefined" && !error) { %>
-          <span><b>OpenAI Response: </b><%= response %></span>
+          <span style="white-space: pre-line;"><b>Prompt: </b><br><%= prompt %></span>
+          <br><br>
+          <span style="white-space: pre-line;"><b>OpenAI Response: </b><br><%= response %></span>
         <% } %>
       </div>
-      <div class="btn-container">
+      <!-- <div class="btn-container">
         <a href="/login/facebook" class="btn">Login with Facebook</a>
         <a href="/login/google" class="btn">Login with Google</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </body>

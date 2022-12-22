@@ -37,13 +37,44 @@
       background: #cccccc;
       color: #000000;
     }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    input[type="text"] {
+      width: 250px;
+    }
+
+    input[type="submit"], 
+    input[type="text"] {
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="btn-container">
-      <a href="/login/facebook" class="btn">Login with Facebook</a>
-      <a href="/login/google" class="btn">Login with Google</a>
+    <div class="wrapper">
+      <form action="/openai" method="post" class="form-wrapper">
+        <input type="text" placeholder="Type a question or a statement." name="text" required>
+        <input type="submit" value="Submit">
+      </form>
+      <div>
+        <% if (typeof error !== "undefined" && !error) { %>
+          <span><b>OpenAI Response: </b><%= response %></span>
+        <% } %>
+      </div>
+      <div class="btn-container">
+        <a href="/login/facebook" class="btn">Login with Facebook</a>
+        <a href="/login/google" class="btn">Login with Google</a>
+      </div>
     </div>
   </div>
 </body>
